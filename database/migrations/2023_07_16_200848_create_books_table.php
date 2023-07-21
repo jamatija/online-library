@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('year');
             $table->string('pdf');
             $table->string('ISBN');
+            $table->timestamps();
+            
             $table->unsignedBigInteger('letter_id')->nullable();
             $table->unsignedBigInteger('language_id')->nullable();
             $table->unsignedBigInteger('binding_id')->nullable();
@@ -34,7 +36,6 @@ return new class extends Migration
             $table->foreign('publisher_id')->references('id')->on('publishers')->onDelete('SET NULL');
             
             
-            $table->timestamps();
         });
     }
 
