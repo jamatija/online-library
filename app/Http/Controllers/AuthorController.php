@@ -38,7 +38,7 @@ class AuthorController extends Controller
         Author::create($request->all());
 
         return redirect()->route('authors.index')
-            ->with('success', 'Author created successfully.');
+            ->with('success', 'Autor je uspješno kreiran.');
     }
 
     public function show($id)
@@ -73,7 +73,7 @@ class AuthorController extends Controller
         $author->update($request->all());
 
         return redirect()->route('authors.index')
-            ->with('success', 'Author updated successfully.');
+            ->with('success', 'Autor je ažuriran.');
     }
 
     public function destroy($id)
@@ -82,6 +82,6 @@ class AuthorController extends Controller
         $author->delete();
 
         return redirect()->route('authors.index')
-            ->with('success', 'Author deleted successfully.');
+            ->with('success', 'Autor je uspješno obrisan.');
     }
 }
