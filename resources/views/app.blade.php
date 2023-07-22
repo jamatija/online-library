@@ -8,6 +8,11 @@
     <nav>
         <a href="{{ route('books.index') }}">Knjige</a>
         <a href="{{ route('authors.index') }}">Autori</a>
+        <a href="{{ route('formats.index') }}">Format</a>
+        <a href="{{ route('bindings.index') }}">Povez</a>
+        <a href="{{ route('letters.index') }}">Pismo</a>
+        <a href="{{ route('languages.index') }}">Jezik</a>
+        <a href="{{ route('publishers.index') }}">Izdavač</a>
 
     </nav>
 
