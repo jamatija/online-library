@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Author;
 
-class Authors extends Controller
+class AuthorController extends Controller
 {
-
     public function index()
     {
         $authors = Author::all();
@@ -22,16 +22,23 @@ class Authors extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
+        $validator = Validator::make($request->all(), [
             'nameSurname' => 'required|string',
-            'photo' => 'required|string',
+            // 'photo' => 'required|string',
             'biography' => 'required|string',
             'wikipedia' => 'required|string',
         ]);
 
-        Author::create($data);
+        if ($validator->fails()) {
+            return redirect()->route('authors.create')
+                ->withErrors($validator)
+                ->withInput();
+        }
 
-        return redirect()->route('authors.index')->with('success', 'Author created successfully.');
+        Author::create($request->all());
+
+        return redirect()->route('authors.index')
+            ->with('success', 'Author created successfully.');
     }
 
     public function show($id)
@@ -48,17 +55,25 @@ class Authors extends Controller
 
     public function update(Request $request, $id)
     {
-        $data = $request->validate([
+        $author = Author::findOrFail($id);
+
+        $validator = Validator::make($request->all(), [
             'nameSurname' => 'required|string',
-            'photo' => 'required|string',
+            // 'photo' => 'required|string',
             'biography' => 'required|string',
             'wikipedia' => 'required|string',
         ]);
 
-        $author = Author::findOrFail($id);
-        $author->update($data);
+        if ($validator->fails()) {
+            return redirect()->route('authors.edit', $id)
+                ->withErrors($validator)
+                ->withInput();
+        }
 
-        return redirect()->route('authors.index')->with('success', 'Author updated successfully.');
+        $author->update($request->all());
+
+        return redirect()->route('authors.index')
+            ->with('success', 'Author updated successfully.');
     }
 
     public function destroy($id)
@@ -66,7 +81,7 @@ class Authors extends Controller
         $author = Author::findOrFail($id);
         $author->delete();
 
-        return redirect()->route('authors.index')->with('success', 'Author deleted successfully.');
+        return redirect()->route('authors.index')
+            ->with('success', 'Author deleted successfully.');
     }
 }
-

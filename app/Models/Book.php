@@ -23,17 +23,17 @@ class Book extends Model
     
     //Many to many - pivot 
     
-    public function booksAuthors():BelongsToMany
+    public function authors():BelongsToMany
     {
         return $this->belongsToMany(Author::class);
     }
     
-    public function booksCategories():BelongsToMany
+    public function categories():BelongsToMany
     {
         return $this->belongsToMany(Categories::class);
     }
     
-    public function booksGenres():BelongsToMany
+    public function genres():BelongsToMany
     {
         return $this->belongsToMany(Genres::class);
     }

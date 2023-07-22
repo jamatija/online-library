@@ -11,7 +11,7 @@ class Genres extends Model
 {
     use HasFactory;
     
-    public function genresBooks():BelongsToMany
+    public function books():BelongsToMany
     {
         return $this->belongsToMany(Book::class);
     }

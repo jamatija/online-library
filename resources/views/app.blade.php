@@ -6,16 +6,18 @@
 <body>
     
     <nav>
-        <p>Nav menu</p>
+        <a href="{{ route('books.index') }}">Knjige</a>
+        <a href="{{ route('authors.index') }}">Autori</a>
+
     </nav>
 
     <div class="container">
         @yield('content')
     </div>
 
-    <footer>
+    <!-- <footer>
         <p>Footer</p>
-    </footer>
+    </footer> -->
     
 </body>
 </html>

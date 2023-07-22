@@ -1,0 +1,1 @@
+<a href="{{ route('books.create') }}">Dodaj knjigu</a>

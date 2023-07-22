@@ -11,7 +11,7 @@ class Categories extends Model
 {
     use HasFactory;
     
-    public function categoriesBooks():BelongsToMany
+    public function books():BelongsToMany
     {
         return $this->belongsToMany(Book::class);
     }
