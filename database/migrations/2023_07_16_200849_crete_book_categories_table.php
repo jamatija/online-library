@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('book_categories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('category_id')->nullable();
+            $table->unsignedBigInteger('categories_id')->nullable();
             $table->unsignedBigInteger('book_id')->nullable();
             
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('SET NULL');
+            $table->foreign('categories_id')->references('id')->on('categories')->onDelete('SET NULL');
             $table->foreign('book_id')->references('id')->on('books')->onDelete('SET NULL');
         });
     }

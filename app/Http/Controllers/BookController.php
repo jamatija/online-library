@@ -7,6 +7,8 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Book;
 use App\Models\Letters;
+use App\Models\Author;
+use App\Models\Categories;
 use App\Models\Languages;
 use App\Models\Binding;
 use App\Models\Formats;
@@ -16,19 +18,21 @@ class BookController extends Controller
 {
     public function index()
     {
-        $books = Book::all();
+        $books = Book::with('format', 'letter', 'language', 'publisher','binding')->get();
         return view('books.index', compact('books'));
     }
 
     public function create()
     {
+        $authors = Author::all();
+        $categories = Categories::all();
         $letters = Letters::all();
         $languages = Languages::all();
         $bindings = Binding::all();
         $formats = Formats::all();
         $publishers = Publishers::all();
         
-        return view('books.create', compact('letters', 'languages', 'bindings', 'formats', 'publishers'));
+        return view('books.create', compact('authors', 'categories', 'letters', 'languages', 'bindings', 'formats', 'publishers'));
     }
 
     public function store(Request $request)
@@ -37,16 +41,16 @@ class BookController extends Controller
             'title' => 'required|string',
             'page_count' => 'required|integer',
             'quantity_count' => 'required|integer',
-            'rented_count' => 'required|integer',
             'body' => 'required|string',
             'year' => 'required|string',
-            'pdf' => 'required|string',
             'ISBN' => 'required|string|unique:books',
             'letter_id' => 'nullable|exists:letters,id',
             'language_id' => 'nullable|exists:languages,id',
             'binding_id' => 'nullable|exists:bindings,id',
             'format_id' => 'nullable|exists:formats,id',
             'publisher_id' => 'nullable|exists:publishers,id',
+            'authors.*' => 'nullable|exists:authors,id',
+            'categories.*' => 'nullable|exists:categories,id',
         ]);
 
         if ($validator->fails()) {
@@ -55,10 +59,13 @@ class BookController extends Controller
                 ->withInput();
         }
 
-        Book::create($request->all());
+        $book = Book::create($request->all());
 
+        $book->authors()->attach($request->input('authors'));
+        $book->categories()->attach($request->input('categories'));
+        
         return redirect()->route('books.index')
-            ->with('success', 'Book created successfully.');
+            ->with('success', 'Knjiga je uspješno dodata.');
     }
 
     public function show($id)
@@ -69,6 +76,8 @@ class BookController extends Controller
 
     public function edit($id)
     {
+        $authors = Author::all();
+        $categories = Categories::all();
         $book = Book::findOrFail($id);
         $letters = Letters::all();
         $languages = Languages::all();
@@ -76,7 +85,7 @@ class BookController extends Controller
         $formats = Formats::all();
         $publishers = Publishers::all();
         
-        return view('books.edit', compact('book', 'letters', 'languages', 'bindings', 'formats', 'publishers'));
+        return view('books.edit', compact('authors', 'categories', 'book', 'letters', 'languages', 'bindings', 'formats', 'publishers'));
     }
 
     public function update(Request $request, $id)
@@ -87,20 +96,16 @@ class BookController extends Controller
             'title' => 'required|string',
             'page_count' => 'required|integer',
             'quantity_count' => 'required|integer',
-            'rented_count' => 'required|integer',
             'body' => 'required|string',
             'year' => 'required|string',
-            'pdf' => 'required|string',
-            'ISBN' => [
-                'required',
-                'string',
-                Rule::unique('books')->ignore($book->id),
-            ],
+            'ISBN' => ['required', 'string', Rule::unique('books')->ignore($book->id)],
             'letter_id' => 'nullable|exists:letters,id',
             'language_id' => 'nullable|exists:languages,id',
             'binding_id' => 'nullable|exists:bindings,id',
             'format_id' => 'nullable|exists:formats,id',
             'publisher_id' => 'nullable|exists:publishers,id',
+            'authors.*' => 'nullable|exists:authors,id',
+            'categories.*' => 'nullable|exists:categories,id',
         ]);
 
         if ($validator->fails()) {
@@ -124,4 +129,3 @@ class BookController extends Controller
             ->with('success', 'Book deleted successfully.');
     }
 }
-

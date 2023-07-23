@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('title');
             $table->integer('page_count');
             $table->integer('quantity_count');
-            $table->integer('rented_count');
+            // $table->integer('rented_count');
             $table->string('body');
             $table->string('year');
-            $table->string('pdf');
+            // $table->string('pdf');
             $table->string('ISBN');
             $table->timestamps();
             

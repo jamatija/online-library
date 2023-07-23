@@ -15,39 +15,37 @@
 
     <form action="{{ route('books.store') }}" method="post">
         @csrf
-        <label for="title">Title:</label>
+        <label for="title">Naslov:</label>
         <input type="text" id="title" name="title" value="{{ old('title') }}" required><br><br>
 
-        <label for="page_count">Page Count:</label>
+        <label for="page_count">Broj stranica:</label>
         <input type="number" id="page_count" name="page_count" value="{{ old('page_count') }}" required><br><br>
 
-        <label for="quantity_count">Quantity Count:</label>
+        <label for="quantity_count">Količina:</label>
         <input type="number" id="quantity_count" name="quantity_count" value="{{ old('quantity_count') }}" required><br><br>
 
-        <label for="rented_count">Rented Count:</label>
-        <input type="number" id="rented_count" name="rented_count" value="{{ old('rented_count') }}" required><br><br>
 
-        <label for="body">Body:</label>
+
+        <label for="body">Natpis:</label>
         <input type="text" id="body" name="body" value="{{ old('body') }}" required><br><br>
 
-        <label for="year">Year:</label>
+        <label for="year">Godina:</label>
         <input type="text" id="year" name="year" value="{{ old('year') }}" required><br><br>
 
-        <label for="pdf">PDF:</label>
-        <input type="text" id="pdf" name="pdf" value="{{ old('pdf') }}" required><br><br>
+        
 
         <label for="ISBN">ISBN:</label>
         <input type="text" id="ISBN" name="ISBN" value="{{ old('ISBN') }}" required><br><br>
         
         
-        <label for="authors">Authors:</label>
+        <label for="authors">Autori:</label>
         <select id="authors" name="authors[]" multiple>
             @foreach ($authors as $author)
-                <option value="{{ $author->id }}">{{ $author->name }}</option>
+                <option value="{{ $author->id }}">{{ $author->nameSurname }}</option>
             @endforeach
         </select><br><br>
 
-        <label for="categories">Categories:</label>
+        <label for="categories">Kategorije:</label>
         <select id="categories" name="categories[]" multiple>
             @foreach ($categories as $category)
                 <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -55,7 +53,7 @@
         </select><br><br>
                 
 
-        <label for="letter_id">Letter:</label>
+        <label for="letter_id">Pismo:</label>
         <select id="letter_id" name="letter_id">
             <option value="">Select Letter</option>
             @foreach ($letters as $letter)
@@ -63,7 +61,7 @@
             @endforeach
         </select><br><br>
 
-        <label for="language_id">Language:</label>
+        <label for="language_id">Jezik:</label>
         <select id="language_id" name="language_id">
             <option value="">Select Language</option>
             @foreach ($languages as $language)
@@ -71,7 +69,7 @@
             @endforeach
         </select><br><br>
 
-        <label for="binding_id">Binding:</label>
+        <label for="binding_id">Povez:</label>
         <select id="binding_id" name="binding_id">
             <option value="">Select Binding</option>
             @foreach ($bindings as $binding)
@@ -87,9 +85,9 @@
             @endforeach
         </select><br><br>
 
-        <label for="publisher_id">Publisher:</label>
+        <label for="publisher_id">Izdavač:</label>
         <select id="publisher_id" name="publisher_id">
-            <option value="">Select Publisher</option>
+            <option value="">Izaberi izdavača</option>
             @foreach ($publishers as $publisher)
                 <option value="{{ $publisher->id }}">{{ $publisher->name }}</option>
             @endforeach

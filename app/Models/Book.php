@@ -21,6 +21,22 @@ class Book extends Model
 {
     use HasFactory;
     
+    protected $fillable = [
+        'title',
+        'page_count',
+        'quantity_count',
+        'rented_count',
+        'body',
+        'year',
+        'pdf',
+        'ISBN',
+        'letter_id',
+        'language_id',
+        'binding_id',
+        'format_id',
+        'publisher_id',
+    ];
+    
     //Many to many - pivot 
     
     public function authors():BelongsToMany
