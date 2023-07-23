@@ -116,8 +116,11 @@ class BookController extends Controller
 
         $book->update($request->all());
 
+        $book->authors()->attach($request->input('authors'));
+        $book->categories()->attach($request->input('categories'));
+        
         return redirect()->route('books.index')
-            ->with('success', 'Book updated successfully.');
+            ->with('success', 'Knjiga je ažurirana');
     }
 
     public function destroy($id)
@@ -126,6 +129,6 @@ class BookController extends Controller
         $book->delete();
 
         return redirect()->route('books.index')
-            ->with('success', 'Book deleted successfully.');
+            ->with('success', 'Knjiga je uspješno obrisana.');
     }
 }

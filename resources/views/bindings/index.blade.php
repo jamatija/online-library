@@ -6,6 +6,7 @@
     
     <h1>Povezi</h1>
     <a href="{{ route('bindings.create') }}">Dodaj novi povez</a>
+    @if($bindings->count() > 0)   
     <table>
         
         <thead>
@@ -16,7 +17,6 @@
         
         <tbody>
             
-            @if($bindings->count() > 0)   
                 @foreach($bindings as $binding)
                     <tr>
                         <td>{{ $binding->name }}</td>
@@ -31,8 +31,8 @@
 
                     </tr>  
                 @endforeach
-            @endif
-            
-        </tbody>
-    </table>
-@endsection
+                
+            </tbody>
+        </table>
+        @endif
+        @endsection

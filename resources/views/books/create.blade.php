@@ -4,7 +4,7 @@
 
 @section('content')
     
-    <h1>Create Book</h1>
+    <h1>Unesi knjigu</h1>
     @if ($errors->any())
         <ul>
             @foreach ($errors->all() as $error)
@@ -55,7 +55,7 @@
 
         <label for="letter_id">Pismo:</label>
         <select id="letter_id" name="letter_id">
-            <option value="">Select Letter</option>
+            <option value="">Izaberi pismo</option>
             @foreach ($letters as $letter)
                 <option value="{{ $letter->id }}">{{ $letter->name }}</option>
             @endforeach
@@ -63,7 +63,7 @@
 
         <label for="language_id">Jezik:</label>
         <select id="language_id" name="language_id">
-            <option value="">Select Language</option>
+            <option value="">Izaberi jezik</option>
             @foreach ($languages as $language)
                 <option value="{{ $language->id }}">{{ $language->name }}</option>
             @endforeach
@@ -71,7 +71,7 @@
 
         <label for="binding_id">Povez:</label>
         <select id="binding_id" name="binding_id">
-            <option value="">Select Binding</option>
+            <option value="">Izaberi povez</option>
             @foreach ($bindings as $binding)
                 <option value="{{ $binding->id }}">{{ $binding->name }}</option>
             @endforeach
@@ -79,7 +79,7 @@
 
         <label for="format_id">Format:</label>
         <select id="format_id" name="format_id">
-            <option value="">Select Format</option>
+            <option value="">Izaberi format</option>
             @foreach ($formats as $format)
                 <option value="{{ $format->id }}">{{ $format->name }}</option>
             @endforeach
@@ -93,6 +93,8 @@
             @endforeach
         </select><br><br>
 
-        <button type="submit">Sačuvaj</button>
+        <button type="submit">Dodaj Knjigu</button>
+        <a href="{{ route('books.index') }}">Vrati se na početnu</a>
+        
     </form>
     @endsection

@@ -3,10 +3,11 @@
 @section('title', 'Izdavač')
 
 @section('content')
-    
-    <h1>Izdavač</h1>
-    <a href="{{ route('publishers.create') }}">Dodaj novog izdavača</a>
-    <table>
+
+<h1>Izdavač</h1>
+<a href="{{ route('publishers.create') }}">Dodaj novog izdavača</a>
+@if($publishers->count() > 0)   
+<table>
         
         <thead>
             <tr>
@@ -16,7 +17,6 @@
         
         <tbody>
             
-            @if($publishers->count() > 0)   
                 @foreach($publishers as $publisher)
                     <tr>
                         <td>{{ $publisher->name }}</td>
@@ -31,8 +31,8 @@
 
                     </tr>  
                 @endforeach
-            @endif
-            
-        </tbody>
-    </table>
+                
+            </tbody>
+        </table>
+        @endif
 @endsection

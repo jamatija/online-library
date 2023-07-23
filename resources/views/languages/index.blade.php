@@ -6,6 +6,7 @@
     
     <h1>Jezik</h1>
     <a href="{{ route('languages.create') }}">Dodaj novi jezik</a>
+    @if($languages->count() > 0)   
     <table>
         
         <thead>
@@ -16,7 +17,6 @@
         
         <tbody>
             
-            @if($languages->count() > 0)   
                 @foreach($languages as $language)
                     <tr>
                         <td>{{ $language->name }}</td>
@@ -31,8 +31,8 @@
 
                     </tr>  
                 @endforeach
-            @endif
-            
-        </tbody>
-    </table>
+                
+            </tbody>
+        </table>
+        @endif
 @endsection

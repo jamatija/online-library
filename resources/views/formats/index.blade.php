@@ -6,6 +6,8 @@
     
     <h1>Format</h1>
     <a href="{{ route('formats.create') }}">Dodaj novi format</a>
+    
+    @if($formats->count() > 0)
     <table>
         
         <thead>
@@ -16,7 +18,7 @@
         
         <tbody>
             
-            @if($formats->count() > 0)   
+               
                 @foreach($formats as $format)
                     <tr>
                         <td>{{ $format->name }}</td>
@@ -31,8 +33,8 @@
 
                     </tr>  
                 @endforeach
-            @endif
-            
-        </tbody>
-    </table>
+                
+            </tbody>
+        </table>
+        @endif
 @endsection

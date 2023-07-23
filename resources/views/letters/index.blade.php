@@ -6,6 +6,7 @@
     
     <h1>Pismo</h1>
     <a href="{{ route('letters.create') }}">Dodaj novo pismo</a>
+    @if($letters->count() > 0)   
     <table>
         
         <thead>
@@ -16,7 +17,6 @@
         
         <tbody>
             
-            @if($letters->count() > 0)   
                 @foreach($letters as $letter)
                     <tr>
                         <td>{{ $letter->name }}</td>
@@ -31,8 +31,8 @@
 
                     </tr>  
                 @endforeach
-            @endif
-            
-        </tbody>
-    </table>
+                
+            </tbody>
+        </table>
+        @endif
 @endsection
